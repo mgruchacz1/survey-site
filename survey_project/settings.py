@@ -28,7 +28,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = os.environ['DEBUG']
 
 ALLOWED_HOSTS = []
 
@@ -85,6 +85,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+AUTH_USER_MODEL = "surveys.User"
 
 
 # Password validation
