@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'surveys.apps.SurveysConfig', # activate app
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
