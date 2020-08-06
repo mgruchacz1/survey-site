@@ -14,17 +14,18 @@ def get_default_survey_status():
     
 class Survey(models.Model):
     title = models.CharField(max_length=100)
-    creator = models.ForeignKey(User, related_name='created_surveys', on_delete=models.CASCADE, blank=False)
+    owner = models.ForeignKey(User, related_name='created_surveys', on_delete=models.CASCADE, null=True)
     status = models.ForeignKey(SurveyStatus, null=True, on_delete=models.SET_DEFAULT, default=get_default_survey_status)
 
 class Question(models.Model):
     text = models.CharField(max_length=100)
-    survey = models.ForeignKey(Survey, related_name='questions', on_delete=models.CASCADE, blank=False)
-
+    survey = models.ForeignKey(Survey, related_name='questions', on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
 
 class Choice(models.Model):
     text = models.CharField(max_length=100)
-    question = models.ForeignKey(Question, related_name='choices', on_delete=models.CASCADE, blank=False)
+    question = models.ForeignKey(Question, related_name='choices', on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
 
 class SurveyResponse(models.Model):
     responder = models.ForeignKey(User, related_name='responded_surveys', on_delete=models.CASCADE, blank=False)
