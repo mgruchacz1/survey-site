@@ -16,24 +16,24 @@ class SurveyStatusSerializer(serializers.HyperlinkedModelSerializer):
 class SurveySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Survey
-        fields = ('id','title', 'status')
+        fields = ('id','title', 'status', 'owner')
 
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Question
-        fields = ('id','text', 'survey')
+        fields = ('id','text', 'survey', 'owner')
 
 class ChoiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Choice
-        fields = ('id','text','question')
+        fields = ('id','text','question', 'owner')
 
 class SurveyResponseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SurveyResponse
-        fields = ('id', 'responder', 'survey')
+        fields = ('id', 'responder', 'survey', 'responder')
 
 class QuestionResponseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = QuestionResponse
-        fields = ('id', 'survey_response', 'choice')
+        fields = ('id', 'survey_response', 'choice', 'responder')
