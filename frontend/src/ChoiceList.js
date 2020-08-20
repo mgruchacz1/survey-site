@@ -1,9 +1,17 @@
 import React from 'react';
+import Choice from './Choice';
 
 function ChoiceList(props) {
     const choices = props.choices;
-    const listItems = choices.map((choice) =>
-        <Choice key={choice.id} text={choice.text}></Choice>
+    if (!choices) {
+        return (
+            <div>
+                No choices.
+            </div>
+        )
+    }
+    const listItems = choices.map((choice, index) =>
+        <Choice key={index} choice={choice}></Choice>
     )
     return(
         <ul>{listItems}</ul>

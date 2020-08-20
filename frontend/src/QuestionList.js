@@ -1,12 +1,21 @@
 import React from 'react';
+import Question from './Question';
 
 function QuestionList(props) {
-    const questions = props.questions;
-    const listItems = questions.map((question) =>
-        <Question key={question.id} text={question.text} choices={question.choices} />
+
+    const questions = props.questionURLs;
+    if (!questions) {
+        return (
+            <div>
+                No Questions.
+            </div>
+        )
+    }
+    const listItems = questions.map((question, index) =>
+        <Question key={index} question={question} />
     );
 
-    return(
+    return (
         <ul>{listItems}</ul>
     );
 }
