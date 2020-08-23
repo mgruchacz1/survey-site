@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'react-bootstrap/Modal'
 
 class SurveyResponse extends React.Component {
 
@@ -14,9 +15,23 @@ class SurveyResponse extends React.Component {
     }
 
     render() {
+        var surveyTitle = (this.props.title ? this.props.title : "No Survey");
         return(
             <div>
-                Survey Response
+                <Modal {...props} centered size="lg">
+                    <Modal.Header closeButton>
+                        <Modal.title id="modal-current-survey-title">
+                            Survey Title: {surveyTitle}
+                        </Modal.title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <h4>Question Title</h4>
+                        <p>choice list</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.props.onSubmit}>Submit</Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         );
     }
