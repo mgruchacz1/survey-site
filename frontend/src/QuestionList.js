@@ -6,7 +6,7 @@ function QuestionList(props) {
     const questions = props.questionURLs;
     if (!questions) {
         return (
-            <div>
+            <div className="QuestionList">
                 No Questions.
             </div>
         )
@@ -16,7 +16,9 @@ function QuestionList(props) {
     );
 
     return (
-        <ul>{listItems}</ul>
+        <div className="QuestionList">
+            <ul>{listItems}</ul>
+        </div>
     );
 }
 

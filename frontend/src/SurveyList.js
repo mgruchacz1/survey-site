@@ -1,5 +1,10 @@
 import React from 'react';
 import Survey from './Survey';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import Slider from "react-slick";
+
 
 class SurveyList extends React.Component {
 
@@ -40,7 +45,18 @@ class SurveyList extends React.Component {
                     <Survey survey={survey} key={survey.id} />
                 );
                 return (
-                    <ul>{listItems}</ul>
+                    <div className="SurveyList">
+                        <h4>Choose a survey</h4>
+                        <Slider
+                            dots={true}
+                            slidesToShow={3}
+                            slidesToScroll={1}
+                            autoplay={true}
+                            autoplaySpeed={3000}
+                        >
+                            {listItems}
+                        </Slider>
+                    </div>
                 );
             } else {
                 return (

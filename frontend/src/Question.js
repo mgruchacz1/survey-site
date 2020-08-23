@@ -1,5 +1,4 @@
 import React from 'react';
-import ChoiceList from './ChoiceList';
 
 class Question extends React.Component {
 
@@ -37,8 +36,7 @@ class Question extends React.Component {
             if (question) {
                 return (
                     <div>
-                        {question.text} <br />
-                        <ChoiceList choices={question.choices} />
+                        {question.text}
                     </div>
                 );
             } else {
