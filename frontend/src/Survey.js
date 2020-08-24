@@ -5,12 +5,13 @@ import Card from 'react-bootstrap/Card';
 
 function Survey(props) {
     const survey = props.survey;
+    var chooseSurvey = props.chooseSurvey;
     return (
         <div>
-            <Card className="Survey">
+            <Card className="Survey" onClick={() => chooseSurvey(survey)}>
                 <Card.Header>{survey.title}</Card.Header>
                 <Card.Body>
-                    <Card.Text><QuestionList questionURLs={survey.questions} /></Card.Text>
+                    <QuestionList questionURLs={survey.questions} />
                 </Card.Body>
             </Card>
         </div >

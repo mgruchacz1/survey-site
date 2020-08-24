@@ -8,6 +8,7 @@ import Slider from "react-slick";
 
 class SurveyList extends React.Component {
 
+    // props: chooseSurvey
     constructor(props) {
         super(props);
         this.state = { surveys: null };
@@ -42,7 +43,7 @@ class SurveyList extends React.Component {
         } else {
             if (surveys) {
                 const listItems = surveys.map((survey) =>
-                    <Survey survey={survey} key={survey.id} />
+                    <Survey chooseSurvey={this.props.chooseSurvey} survey={survey} key={survey.id} />
                 );
                 return (
                     <div className="SurveyList">

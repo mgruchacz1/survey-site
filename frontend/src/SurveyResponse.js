@@ -1,5 +1,6 @@
 import React from 'react';
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 class SurveyResponse extends React.Component {
 
@@ -15,18 +16,18 @@ class SurveyResponse extends React.Component {
     }
 
     render() {
-        var surveyTitle = (this.props.title ? this.props.title : "No Survey");
+        let surveyTitle = (this.props.survey ? this.props.survey.title : "No Survey");
         return(
-            <div>
-                <Modal {...props} centered size="lg">
+            <div id="SurveyResponse">
+                <Modal show={this.props.show} onHide={this.props.onHide} centered size="lg">
                     <Modal.Header closeButton>
-                        <Modal.title id="modal-current-survey-title">
+                        <Modal.Title id="modal-current-survey-title">
                             Survey Title: {surveyTitle}
-                        </Modal.title>
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <h4>Question Title</h4>
-                        <p>choice list</p>
+                        <h6>Choice List</h6>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.props.onSubmit}>Submit</Button>
