@@ -17,19 +17,17 @@ class SurveySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Survey
         fields = ('id','title', 'status', 'questions')
-        # depth = 2
 
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Question
         fields = ('id','text', 'survey', 'choices')
-        # depth = 1
+        depth = 1
 
 class ChoiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Choice
         fields = ('id','text','question')
-        # depth = 1
 
 class SurveyResponseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
