@@ -11,7 +11,7 @@ function ChoiceList(props) {
         )
     }
     const listItems = choices.map((choice, index) =>
-        <Choice key={index} choice={choice}></Choice>
+        <Choice key={index} choice={choice} />
     )
     return(
         <ul>{listItems}</ul>

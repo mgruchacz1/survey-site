@@ -40,10 +40,10 @@ class Choice(models.Model):
         return self.text
 
 class SurveyResponse(models.Model):
-    responder = models.ForeignKey(User, related_name='responded_surveys', on_delete=models.CASCADE, blank=False)
+    responder = models.ForeignKey(User, related_name='responded_surveys', on_delete=models.CASCADE, null=True)
     survey = models.ForeignKey(Survey, related_name='responses', on_delete=models.CASCADE, blank=False)
 
 class QuestionResponse(models.Model):
     survey_response = models.ForeignKey(SurveyResponse, on_delete=models.CASCADE, blank=False)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, blank=False)
+    choice = models.ForeignKey(Choice, on_delete=models.CASCADE, blank=False)
