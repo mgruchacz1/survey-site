@@ -30,3 +30,11 @@ class ChoiceViewSet(viewsets.ModelViewSet):
     queryset = Choice.objects.all()
     serializer_class = ChoiceSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
+
+class SurveyResponseViewSet(viewsets.ModelViewSet):
+    queryset = SurveyResponse.objects.all()
+    serializer_class = SurveyResponseSerializer
+
+class QuestionResponseViewSet(viewsets.ModelViewSet):
+    queryset = QuestionResponse.objects.all()
+    serializer_class = QuestionResponseSerializer

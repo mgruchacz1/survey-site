@@ -44,6 +44,6 @@ class SurveyResponse(models.Model):
     survey = models.ForeignKey(Survey, related_name='responses', on_delete=models.CASCADE, blank=False)
 
 class QuestionResponse(models.Model):
-    survey_response = models.ForeignKey(SurveyResponse, on_delete=models.CASCADE, blank=False)
+    survey_response = models.ForeignKey(SurveyResponse, related_name='questions', on_delete=models.CASCADE, blank=False)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, blank=False)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE, blank=False)

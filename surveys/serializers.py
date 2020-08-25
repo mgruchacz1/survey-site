@@ -32,9 +32,10 @@ class ChoiceSerializer(serializers.HyperlinkedModelSerializer):
 class SurveyResponseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SurveyResponse
-        fields = ('id', 'responder', 'survey', 'responder')
+        fields = ('id', 'survey', 'questions')
+        depth = 1
 
 class QuestionResponseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = QuestionResponse
-        fields = ('id', 'survey_response', 'question', 'choice', 'responder')
+        fields = ('id', 'survey_response', 'question', 'choice')
