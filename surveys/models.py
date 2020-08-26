@@ -43,6 +43,9 @@ class SurveyResponse(models.Model):
     responder = models.ForeignKey(User, related_name='responded_surveys', on_delete=models.CASCADE, null=True, blank=True)
     survey = models.ForeignKey(Survey, related_name='responses', on_delete=models.CASCADE, blank=False)
 
+    def __str__(self):
+        return self.survey.title
+
 class QuestionResponse(models.Model):
     survey_response = models.ForeignKey(SurveyResponse, related_name='questions', on_delete=models.CASCADE, blank=False)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, blank=False)

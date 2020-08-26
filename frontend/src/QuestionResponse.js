@@ -11,10 +11,34 @@ function QuestionResponse(props) {
         );
     }
 
+    // post request to create questionResponse
+    function submitResponse(choice) {
+        const response = props.surveyResponse;
+        const question = props.question;
+        fetch(`http://localhost:8000/questionresponses/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "survey_response": response.id,
+                "question": question.id,
+                "choice": choice.id
+            })
+        })
+        .then(response => response.json())
+        .then(() => {
+            props.onSubmit();
+        })
+        .catch((error) => {
+            console.error('Error:', error)
+        })
+    }
+
     return (
         <div className="QuestionResponse">
-            {question.text}
-            <ChoiceList choices={question.choices}/>
+            {question.text} <br />
+            <ChoiceList choices={question.choices} onChoose={submitResponse}/>
         </div>
     );
 }

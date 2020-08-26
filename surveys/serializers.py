@@ -22,20 +22,19 @@ class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Question
         fields = ('id','text', 'survey', 'choices')
-        depth = 1
 
 class ChoiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Choice
         fields = ('id','text','question')
 
-class SurveyResponseSerializer(serializers.HyperlinkedModelSerializer):
+class SurveyResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = SurveyResponse
         fields = ('id', 'survey', 'questions')
         depth = 1
 
-class QuestionResponseSerializer(serializers.HyperlinkedModelSerializer):
+class QuestionResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestionResponse
         fields = ('id', 'survey_response', 'question', 'choice')

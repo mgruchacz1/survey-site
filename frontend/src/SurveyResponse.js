@@ -23,7 +23,14 @@ class SurveyResponse extends React.Component {
         }
     }
 
-    // load the next question
+    loadNextQuestion() {
+        let questionsAnswered = this.state.questionsAnswered;
+        this.setState({ questionsAnswered: ++questionsAnswered });
+        if (questionsAnswered < this.props.survey.questions.length) {
+            this.loadQuestion();
+        }
+    }
+
     loadQuestion() {
         let url = this.props.survey.questions[this.state.questionsAnswered];
         fetch(url)
@@ -37,6 +44,8 @@ class SurveyResponse extends React.Component {
             )
     }
 
+
+
     createSurveyResponse() {
         let survey = this.props.survey;
         if (survey) {
@@ -45,9 +54,9 @@ class SurveyResponse extends React.Component {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: {
-                    'survey': survey
-                }
+                body: JSON.stringify({
+                    "survey": survey.id
+                })
             })
                 .then(response => response.json())
                 .then(
@@ -63,71 +72,36 @@ class SurveyResponse extends React.Component {
         }
     }
 
-    // sent as callback to QuestionResponse component
-    // append our questionResponse to our surveyResponse, update our questions answered count
-    addQuestionResponse(questionResponse) {
-        let surveyResponse = this.state.surveyResponse;
-        surveyResponse.questions.push(questionResponse);
-        // send update 
-        fetch(`/surveyresponses/${surveyResponse.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: {
-                'questions': surveyResponse.questions
-            }
-        })
-            .then(response => response.json())
-            .then((surveyResponse) => {
-                let questionsAnswered = this.state.questionsAnswered;
-                ++questionsAnswered;
-                this.setState({
-                    surveyResponse: surveyResponse,
-                    questionsAnswered: questionsAnswered
-                })
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            })
-    }
-
     render() {
         let survey = this.props.survey;
+        let body;
+        let title;
         if (survey) {
             let question = this.state.question;
-            let body;
+            title = survey.title;
+            let surveyResponse = this.state.surveyResponse;
             // if survey not complete, show current question
             if (this.state.questionsAnswered !== survey.questions.length) {
                 body = <Modal.Body>
-                    <QuestionResponse question={question} onSubmit={this.addQuestionResponse} />
+                    <QuestionResponse surveyResponse={surveyResponse} question={question} onSubmit={this.loadNextQuestion.bind(this)} />
                 </Modal.Body>
             } else {
                 body = <Modal.Body>
-                    Survey Complete! 
+                    Survey Complete!
                 </Modal.Body>
             }
-            return (
-                <div id="SurveyResponse">
-                    <Modal show={this.props.show} onHide={this.props.onHide} centered size="lg">
-                        <Modal.Header closeButton>
-                            <Modal.Title id="modal-current-survey-title">
-                                {survey.title}
-                            </Modal.Title>
-                        </Modal.Header>
-                        {body}
-                    </Modal>
-                </div>
-            );
+        } else {
+            title = 'No Survey';
         }
         return (
             <div id="SurveyResponse">
                 <Modal show={this.props.show} onHide={this.props.onHide} centered size="lg">
                     <Modal.Header closeButton>
                         <Modal.Title id="modal-current-survey-title">
-                            No Survey
+                            {title}
                         </Modal.Title>
                     </Modal.Header>
+                    {body}
                 </Modal>
             </div>
         );

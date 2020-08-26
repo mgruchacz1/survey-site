@@ -35,6 +35,17 @@ class SurveyResponseViewSet(viewsets.ModelViewSet):
     queryset = SurveyResponse.objects.all()
     serializer_class = SurveyResponseSerializer
 
+    def perform_create(self, serializer):
+        survey = Survey.objects.get(id=self.request.data['survey'])
+        serializer.save(survey=survey)
+
 class QuestionResponseViewSet(viewsets.ModelViewSet):
     queryset = QuestionResponse.objects.all()
     serializer_class = QuestionResponseSerializer
+
+    def perform_create(self, serializer):
+        survey_id = self.request.data['survey_response']
+        survey_response = SurveyResponse.objects.get(id=survey_id)
+        question = Question.objects.get(id=self.request.data['question'])
+        choice = Choice.objects.get(id=self.request.data['choice'])
+        serializer.save(survey_response=survey_response, question=question, choice=choice)

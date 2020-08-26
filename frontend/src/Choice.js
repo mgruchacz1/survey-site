@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import './Choice.css';
 
 function Choice(props) {
-    const choice = props.choice;
+    const [choice, setChoice] = React.useState(null)
+
+    useEffect(() => {
+        if (props.choice) {
+            fetch(props.choice)
+                .then(response => response.json())
+                .then((choice) => {
+                    setChoice(choice)
+                })
+        }
+    }, [props.choice,])
+
     if (!choice) {
         return (
             <div>
@@ -9,9 +22,14 @@ function Choice(props) {
             </div>
         )
     }
-    return(
+
+    function choose() {
+        props.onClick(choice);
+    }
+
+    return (
         <div>
-            {choice.text}
+            <Button onClick={choose}>{choice.text}</Button>
         </div>
     )
 }
