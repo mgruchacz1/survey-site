@@ -3,11 +3,16 @@ Web app to create and fill out surveys
 
 To configure locally:
 Pull repository
+
 Store Django secret key information in a file called configuration.env in the survey_project folder
+
 From the survey-site directory run:
-python manage.py runserver
+
+## python manage.py runserver
+
 From the frontend directory run:
-npm start
+
+## npm start
 
 
 
