@@ -1,7 +1,15 @@
 # survey-site
 Web app to create and fill out surveys
 
-Store secret key information in a file called configuration.env in the survey_project folder
+To configure locally:
+Pull repository
+Store Django secret key information in a file called configuration.env in the survey_project folder
+From the survey-site directory run:
+python manage.py runserver
+From the frontend directory run:
+npm start
+
+
 
 # Create react app README
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
